@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Skills Board - Prove Your AI Capability</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --navy: #0f172a;
+            --slate: #475569;
+            --light-slate: #64748b;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --bg: #ffffff;
+            --bg-subtle: #f8fafc;
+            --border: #e2e8f0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--slate);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--navy);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--slate);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--navy);
+        }
+        
+        .nav-cta {
+            padding: 10px 20px;
+            background: var(--accent);
+            color: white;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        
+        .nav-cta:hover {
+            background: var(--accent-hover);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--navy);
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: var(--slate);
+            margin-bottom: 40px;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+        
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            padding: 16px 32px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            padding: 16px 32px;
+            background: transparent;
+            color: var(--slate);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .hero-meta {
+            font-size: 15px;
+            color: var(--light-slate);
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-alt {
+            background: var(--bg-subtle);
+        }
+        
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 16px;
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--slate);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+            line-height: 1.7;
+        }
+        
+        /* Why It Matters */
+        .why-matters {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--slate);
+        }
+        
+        /* Certification Cards */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            margin-bottom: 60px;
+        }
+        
+        .cert-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+        
+        .cert-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.12);
+            transform: translateY(-2px);
+        }
+        
+        .cert-header {
+            margin-bottom: 20px;
+        }
+        
+        .cert-acronym {
+            display: inline-block;
+            padding: 4px 10px;
+            background: var(--bg-subtle);
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+        
+        .cert-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .cert-value {
+            font-size: 15px;
+            color: var(--light-slate);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .cert-outcomes {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        
+        .cert-outcomes li {
+            padding-left: 24px;
+            position: relative;
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: var(--slate);
+        }
+        
+        .cert-outcomes li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .cert-meta {
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: var(--light-slate);
+        }
+        
+        .cert-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .cert-actions .btn-primary {
+            flex: 1;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 15px;
+        }
+        
+        .cert-actions .btn-secondary {
+            padding: 12px 20px;
+            font-size: 15px;
+        }
+        
+        /* Role Module Box */
+        .role-module-box {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .role-module-box h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        .role-module-box p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* What You Get */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-subtle);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .benefit-text {
+            font-size: 16px;
+            color: var(--slate);
+            line-height: 1.6;
+        }
+        
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto 40px;
+        }
+        
+        .step {
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            font-size: 18px;
+            color: var(--navy);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .step p {
+            font-size: 15px;
+            color: var(--slate);
+            line-height: 1.7;
+        }
+        
+        .step-note {
+            text-align: center;
+            font-size: 15px;
+            color: var(--light-slate);
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Sample Questions */
+        .sample-questions {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .question-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .question-item p {
+            font-size: 16px;
+            color: var(--slate);
+            font-style: italic;
+        }
+        
+        /* FAQ */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 28px;
+            margin-bottom: 16px;
+        }
+        
+        .faq-item h3 {
+            font-size: 18px;
+            color: var(--navy);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .faq-item p {
+            font-size: 15px;
+            color: var(--slate);
+            line-height: 1.7;
+        }
+        
+        /* Final CTA */
+        .final-cta {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .final-cta h2 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            line-height: 1.3;
+        }
+        
+        .final-cta .btn-primary {
+            background: white;
+            color: var(--navy);
+        }
+        
+        .final-cta .btn-primary:hover {
+            background: var(--bg-subtle);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .footer-links a {
+            color: var(--slate);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--navy);
+        }
+        
+        .footer-email {
+            color: var(--slate);
+            font-size: 14px;
+        }
+        
+        .footer-disclaimer {
+            font-size: 13px;
+            color: var(--light-slate);
+            max-width: 600px;
+            margin-top: 8px;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-group {
+                flex-direction: column;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+            
+            .cert-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="#" class="logo">AI Skills Board</a>
+                <ul class="nav-links">
+                    <li><a href="#certifications">Certifications</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#certifications" class="nav-cta">Get Certified</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Prove you can use AI at work — not just talk about it.</h1>
+            <p>Role-based, vendor-neutral AI certifications for business professionals. Pass a timed, scenario-based assessment to earn a shareable credential and skills transcript.</p>
+            <div class="cta-group">
+                <a href="#certifications" class="btn-primary">Get Certified</a>
+                <a href="#sample-questions" class="btn-secondary">See Sample Questions</a>
+            </div>
+            <p class="hero-meta">45–60 minutes • Online exam • Instant results</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Why It Matters</h2>
+            <div class="why-matters">
+                <p>AI is on every resume now. Hiring teams need signals they can trust. AI Skills Board validates practical AI capability with role-based scenarios and clear competency breakdowns.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-alt" id="certifications">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <p class="section-subtitle">Choose the certification that matches your role and prove your practical AI capability</p>
+            
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <span class="cert-acronym">CASP</span>
+                        <h3>Certified AI Sales Professional</h3>
+                        <p class="cert-value">Master AI-powered prospecting, objection handling, and deal acceleration</p>
+                    </div>
+                    <ul class="cert-outcomes">
+                        <li>Generate and refine sales messaging with AI</li>
+                        <li>Qualify leads and personalize outreach at scale</li>
+                        <li>Build repeatable workflows for objection handling</li>
+                        <li>Verify AI outputs for accuracy and compliance</li>
+                    </ul>
+                    <div class="cert-meta">
+                        45–60 minutes • Timed, scenario-based exam
+                    </div>
+                    <div class="cert-actions">
+                        <a href="https://checkout.example.com/casp" class="btn-primary">Get Certified</a>
+                        <a href="#" class="btn-secondary">View Details</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <span class="cert-acronym">CAPP</span>
+                        <h3>Certified AI Product Professional</h3>
+                        <p class="cert-value">Drive product decisions with AI-powered insights and workflows</p>
+                    </div>
+                    <ul class="cert-outcomes">
+                        <li>Synthesize user research and competitive intelligence</li>
+                        <li>Draft and refine product requirements</li>
+                        <li>Design AI-assisted feature prioritization workflows</li>
+                        <li>Evaluate AI reliability for product use cases</li>
+                    </ul>
+                    <div class="cert-meta">
+                        45–60 minutes • Timed, scenario-based exam
+                    </div>
+                    <div class="cert-actions">
+                        <a href="https://checkout.example.com/capp" class="btn-primary">Get Certified</a>
+                        <a href="#" class="btn-secondary">View Details</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <span class="cert-acronym">CAMP</span>
+                        <h3>Certified AI Marketing Professional</h3>
+                        <p class="cert-value">Create campaigns, content, and strategies powered by AI</p>
+                    </div>
+                    <ul class="cert-outcomes">
+                        <li>Generate and optimize marketing copy and creative briefs</li>
+                        <li>Build audience personas and targeting strategies</li>
+                        <li>Design repeatable content workflows with quality control</li>
+                        <li>Navigate brand safety and compliance</li>
+                    </ul>
+                    <div class="cert-meta">
+                        45–60 minutes • Timed, scenario-based exam
+                    </div>
+                    <div class="cert-actions">
+                        <a href="https://checkout.example.com/camp" class="btn-primary">Get Certified</a>
+                        <a href="#" class="btn-secondary">View Details</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <span class="cert-acronym">CAFP</span>
+                        <h3>Certified AI Finance Professional</h3>
+                        <p class="cert-value">Apply AI to financial analysis, reporting, and decision support</p>
+                    </div>
+                    <ul class="cert-outcomes">
+                        <li>Analyze financial data and generate insights</li>
+                        <li>Draft reports and stakeholder communications</li>
+                        <li>Build AI workflows for forecasting and modeling</li>
+                        <li>Ensure accuracy, compliance, and audit trails</li>
+                    </ul>
+                    <div class="cert-meta">
+                        45–60 minutes • Timed, scenario-based exam
+                    </div>
+                    <div class="cert-actions">
+                        <a href="https://checkout.example.com/cafp" class="btn-primary">Get Certified</a>
+                        <a href="#" class="btn-secondary">View Details</a>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <span class="cert-acronym">CAPL</span>
+                        <h3>Certified AI Project Lead</h3>
+                        <p class="cert-value">Manage projects and programs with AI-powered planning and coordination</p>
+                    </div>
+                    <ul class="cert-outcomes">
+                        <li>Draft project plans, timelines, and status updates</li>
+                        <li>Identify risks and dependencies with AI assistance</li>
+                        <li>Coordinate stakeholder communications efficiently</li>
+                        <li>Build workflows for documentation and tracking</li>
+                    </ul>
+                    <div class="cert-meta">
+                        45–60 minutes • Timed, scenario-based exam
+                    </div>
+                    <div class="cert-actions">
+                        <a href="https://checkout.example.com/capl" class="btn-primary">Get Certified</a>
+                        <a href="#" class="btn-secondary">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="role-module-box">
+                <h3>About the Role-Specific Module</h3>
+                <p>The Role-Specific Module tests applied AI judgment in real workplace scenarios—emails, briefs, plans, memos, stakeholder comms—under constraints like accuracy, privacy, compliance, and risk. It measures quality control habits (verification, escalation) and repeatable workflows, not trivia.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">What You Get</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔗</div>
+                    <div class="benefit-text">Shareable credential link</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">📊</div>
+                    <div class="benefit-text">Skills transcript by competency area</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">💼</div>
+                    <div class="benefit-text">Interview-ready summary of what you've proven</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">📋</div>
+                    <div class="benefit-text">Optional templates/checklists (founding cohort bonus)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-alt" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Purchase Your Certification</h3>
+                    <p>Choose your certification and complete secure checkout. You'll receive your exam access after purchase.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Take the Assessment</h3>
+                    <p>Complete the timed, scenario-based exam when you're ready. Test your practical AI skills in real workplace situations.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Receive Your Credential</h3>
+                    <p>Pass and instantly receive your credential, skills transcript, and shareable proof of capability.</p>
+                </div>
+            </div>
+            <p class="step-note">If you don't pass, you'll receive a breakdown and retake options.</p>
+        </div>
+    </section>
+
+    <section id="sample-questions">
+        <div class="container">
+            <h2 class="section-title">Sample Questions</h2>
+            <p class="section-subtitle">Get a feel for the scenario-based format</p>
+            <div class="sample-questions">
+                <div class="question-item">
+                    <p>"Which prompt reduces hallucinations for a customer-facing response?"</p>
+                </div>
+                <div class="question-item">
+                    <p>"When should you use retrieval vs updating prompts?"</p>
+                </div>
+                <div class="question-item">
+                    <p>"What's the safest workflow for handling sensitive data?"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-alt" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3>Is this technical?</h3>
+                    <p>No. These certifications test practical business judgment, not coding or machine learning theory. You'll work through real workplace scenarios that require AI-assisted decision making.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How long does it take?</h3>
+                    <p>Each certification exam takes 45–60 minutes. You'll receive instant results and your credential immediately upon passing.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Is it vendor-neutral?</h3>
+                    <p>Yes. Our assessments focus on core AI capabilities and workplace judgment that apply across any AI tool or platform.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What do I receive if I pass?</h3>
+                    <p>You'll receive a shareable credential link, a detailed skills transcript breaking down your competencies, and an interview-ready summary of what you've proven.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What if I don't pass?</h3>
+                    <p>You'll receive a detailed breakdown of your performance and retake options. We want you to succeed and build real capability.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can I share it on LinkedIn?</h3>
+                    <p>Absolutely. Your credential includes a shareable link designed for LinkedIn, resumes, and professional profiles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <div class="container">
+            <h2>Ready to stand out with proof — not buzzwords?</h2>
+            <a href="#certifications" class="btn-primary">Get Certified</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-email">support@aiskillsboard.com</p>
+                <ul class="footer-links">
+                    <li><a href="#terms">Terms of Service</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#refunds">Refund Policy</a></li>
+                    <li><a href="#verify">Verify Credential</a></li>
+                </ul>
+                <p class="footer-disclaimer">Independent credentialing organization. Not affiliated with any government body.</p>
+                <p class="footer-disclaimer" style="margin-top: -8px;">© 2026 AI Skills Board. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
